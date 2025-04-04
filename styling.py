@@ -2,6 +2,7 @@ import streamlit as st
 
 CUSTOM_CSS = """
 <style>
+/* Global styling */
 html, body, [class*="css"] {
     font-family: 'Open Sans', sans-serif;
     background-color: #2E2E2E;
@@ -9,14 +10,20 @@ html, body, [class*="css"] {
     margin: 0;
     padding: 0;
 }
+
+/* Container styling */
 .block-container {
     padding: 1rem 2rem !important;
     background-color: #2E2E2E;
 }
+
+/* Headings */
 h1, h2, h3, h4 {
     color: #FFFFFF;
     margin-bottom: 0.5rem;
 }
+
+/* DataFrame styling */
 .dataframe thead {
     background-color: #444444 !important;
     color: #FFFFFF !important;
@@ -27,6 +34,8 @@ h1, h2, h3, h4 {
 .dataframe tbody tr:nth-child(odd) {
     background-color: #2E2E2E !important;
 }
+
+/* Metric card styling */
 div[data-testid="stMetric"],
 div[data-testid="metric-container"] {
     background-color: #2E2E2E;
@@ -36,16 +45,18 @@ div[data-testid="metric-container"] {
     border-left: 0.5rem solid #1f77b4 !important;
 }
 
-/* Download button styling */
-button[title="Download Data"],
-button[aria-label="Download Data"] {
+/* Button styling for interactive elements */
+button {
     background-color: #1f77b4;
     border: none;
     border-radius: 4px;
     padding: 0.5rem 1rem;
     color: #FFFFFF;
-    font-weight: bold;
     cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+button:hover {
+    opacity: 0.8;
 }
 
 /* Expander header styling */
@@ -55,7 +66,16 @@ button[data-baseweb="expander"] {
     color: #1f77b4;
 }
 
-/* Custom divider styling */
+/* Download button styling (Streamlit-specific) */
+.stDownloadButton button {
+    background-color: #1f77b4;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    color: #FFFFFF;
+}
+
+/* Custom divider style */
 hr.custom-divider {
     border: 0;
     border-top: 1px solid #444444;
@@ -66,8 +86,8 @@ hr.custom-divider {
 
 def apply_custom_css():
     """
-    Applies the custom CSS defined above to style the page background,
-    fonts, tables, metrics, buttons, expanders, and dividers.
+    Injects the custom CSS into the Streamlit app for consistent dark styling.
+    Ensures that both local and deployed versions share the same style.
     """
     st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
@@ -80,8 +100,15 @@ def style_metric_cards(
     box_shadow: bool = True
 ) -> None:
     """
-    Applies additional CSS styling specifically for Streamlit metric containers
-    to match the dark background theme.
+    Applies additional styling for metric cards with customizable options.
+    
+    Parameters:
+        background_color (str): Background color of the cards.
+        border_size_px (int): Border width in pixels.
+        border_color (str): Border color.
+        border_radius_px (int): Border radius in pixels.
+        border_left_color (str): Left border accent color.
+        box_shadow (bool): Whether to apply a shadow effect.
     """
     box_shadow_str = (
         "box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.3) !important;"
