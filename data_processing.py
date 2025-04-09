@@ -279,63 +279,88 @@ def calculate_newly_identified(
     reporting_period_start
 ):
     """
-    Determines how many clients in 'rp_df' are 'newly identified' within the 90-day window.
-    A client is 'newly identified' if:
-      (a) They have no prior enrollments in allowed project types before their earliest
-          new enrollment date in 'rp_df', OR
-      (b) Any prior enrollment does not overlap the 90 days before that earliest new enrollment.
+    Determines Veterans who are 'newly identified' within the 90-day reporting period.
+    
+    A Veteran is considered 'newly identified' if either:
+    1. They have no prior enrollments in allowed project types before their earliest
+       enrollment date in the reporting period, OR
+    2. Any prior enrollments do not overlap with the 90-day period before their 
+       earliest new enrollment.
+    
+    Parameters:
+    -----------
+    rp_df : DataFrame
+        DataFrame containing enrollments within the reporting period
+    full_df : DataFrame
+        Complete DataFrame with all historical enrollments
+    allowed_projects : list
+        List of project types to consider for the analysis
+    reporting_period_start : datetime
+        Start date of the 90-day reporting period
+        
+    Returns:
+    --------
+    tuple: (int, DataFrame)
+        Count of newly identified Veterans and their enrollment data
     """
+    # Ensure date columns are datetime
     rp_df["Project Start Date"] = pd.to_datetime(rp_df["Project Start Date"], errors="coerce")
-
+    
+    # Get earliest start date for each client in reporting period
     earliest_starts = rp_df.groupby("Client ID")["Project Start Date"].min().rename("Earliest_RP_Start")
     if earliest_starts.empty:
         return 0, pd.DataFrame()
-
-    clients_in_reporting_period = earliest_starts.index.unique()
-
-    # Full dataset of "allowed" for checking prior enrollments
-    full_allowed_df = full_df.copy()
-    full_allowed_df["Project Start Date"] = pd.to_datetime(full_allowed_df["Project Start Date"], errors="coerce")
-    full_allowed_df["Project Exit Date"] = pd.to_datetime(full_allowed_df["Project Exit Date"], errors="coerce")
-    full_allowed_df = full_allowed_df[full_allowed_df["Project Type Code"].isin(allowed_projects)]
-
-    # Also consider ANY project type for overlap checks
+        
+    # Process full dataset for comparison
+    clients_in_reporting_period = earliest_starts.index.tolist()
+    full_df["Project Start Date"] = pd.to_datetime(full_df["Project Start Date"], errors="coerce")
+    full_df["Project Exit Date"] = pd.to_datetime(full_df["Project Exit Date"], errors="coerce")
+    
+    # Filter for allowed project types
+    full_allowed_df = full_df[full_df["Project Type Code"].isin(allowed_projects)].copy()
+    
+    # Keep all project types for overlap check
     full_any_df = full_df.copy()
-    full_any_df["Project Start Date"] = pd.to_datetime(full_any_df["Project Start Date"], errors="coerce")
-    full_any_df["Project Exit Date"] = pd.to_datetime(full_any_df["Project Exit Date"], errors="coerce")
-
+    
     newly_identified_clients = []
-
+    
     for client_id in clients_in_reporting_period:
         earliest_rp_start = earliest_starts.loc[client_id]
-
-        # (a) No prior enrollments in allowed types
+        
+        # Check if client has any prior enrollments in allowed project types
         prior_allowed = full_allowed_df[
-            (full_allowed_df["Client ID"] == client_id)
-            & (full_allowed_df["Project Start Date"] < earliest_rp_start)
+            (full_allowed_df["Client ID"] == client_id) &
+            (full_allowed_df["Project Start Date"] < earliest_rp_start)
         ]
+        
+        # If no prior enrollments, they're newly identified
         if prior_allowed.empty:
             newly_identified_clients.append(client_id)
             continue
-
-        # (b) If prior allowed enrollments exist, see if ANY earlier enrollment
-        #     overlaps with the 90 days before earliest_rp_start
+            
+        # Check if any prior enrollment overlaps with 90-day window before earliest start
         prior_any = full_any_df[
-            (full_any_df["Client ID"] == client_id)
-            & (full_any_df["Project Start Date"] < earliest_rp_start)
+            (full_any_df["Client ID"] == client_id) &
+            (full_any_df["Project Start Date"] < earliest_rp_start)
         ]
+        
+        # Define 90-day window before earliest start
         window_start = earliest_rp_start - pd.Timedelta(days=90)
-
-        def overlaps_90_days(row):
-            eend = row["Project Exit Date"] if pd.notna(row["Project Exit Date"]) else pd.Timestamp("2099-12-31")
-            estart = row["Project Start Date"]
-            return (estart < earliest_rp_start) and (eend >= window_start)
-
-        # If no overlap, they are newly identified
-        if not any(overlaps_90_days(row) for _, row in prior_any.iterrows()):
+        
+        # Check for overlap with 90-day window
+        has_overlap = False
+        for _, row in prior_any.iterrows():
+            end_date = row["Project Exit Date"] if pd.notna(row["Project Exit Date"]) else pd.Timestamp("2099-12-31")
+            if end_date >= window_start:
+                has_overlap = True
+                break
+                
+        # If no overlap found, client is newly identified
+        if not has_overlap:
             newly_identified_clients.append(client_id)
-
+    
+    # Create final dataframe with only newly identified clients
     newly_identified_df = rp_df[rp_df["Client ID"].isin(newly_identified_clients)].copy()
-    newly_identified_count = len(pd.unique(newly_identified_clients))
-
+    newly_identified_count = len(newly_identified_clients)
+    
     return newly_identified_count, newly_identified_df
