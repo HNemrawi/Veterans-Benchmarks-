@@ -4,7 +4,6 @@ from datetime import datetime
 from typing import Tuple, List, Dict, Any, Optional, Union, Callable
 import streamlit as st
 
-# Core data processing functions
 @st.cache_data
 def process_data(df: pd.DataFrame) -> Tuple[
     pd.DataFrame,  # veterans_served_df
@@ -507,8 +506,8 @@ def calculate_newly_identified(
     newly_identified_df = rp_df[rp_df["Client ID"].isin(newly_identified_clients)].copy()
     
     return len(newly_identified_clients), newly_identified_df
-
-
+    
+    
 def fallback_column(primary_col: pd.Series, backup_col: pd.Series) -> pd.Series:
     """
     Returns values from primary column if available, otherwise from backup column.
@@ -598,7 +597,6 @@ def is_chronically_homeless(df: pd.DataFrame, rpend: pd.Timestamp) -> pd.Series:
     return (df.get("Chronically Homeless at PIT/Current Date - Household", pd.Series([None] * len(df))) == "Yes") | chronic_logic
 
 
-@st.cache_data
 def calculate_chronic_metrics(
     df: pd.DataFrame, 
     reporting_period_start: pd.Timestamp, 
@@ -691,127 +689,4 @@ def calculate_chronic_metrics(
         "A2": (a2_df["Client ID"].nunique(), a2_df),
         "A3": (a3_df["Client ID"].nunique(), a3_df),
         "A4": (a4_df["Client ID"].nunique(), a4_df),
-    }
-
-
-@st.cache_data
-def prepare_gpd_analysis(
-    newly_identified_df: pd.DataFrame,
-    gpd_sources: List[str]
-) -> Tuple[pd.DataFrame, int]:
-    """
-    Analyzes newly identified veterans entering GPD TH.
-    
-    Args:
-        newly_identified_df: DataFrame with newly identified veterans
-        gpd_sources: List of GPD funding sources
-        
-    Returns:
-        Tuple of (DataFrame with newly identified TH veterans, count)
-    """
-    # Filter for newly identified veterans in GPD TH
-    newly_identified_th_df = newly_identified_df[
-        (newly_identified_df["Project Type Code"] == "Transitional Housing") &
-        (newly_identified_df["Funding Source"].isin(gpd_sources))
-    ].copy()
-    
-    # Count unique clients
-    newly_identified_th_count = newly_identified_th_df["Client ID"].nunique()
-    
-    return newly_identified_th_df, newly_identified_th_count
-
-
-# HELPER FUNCTIONS FOR DATA PREPARATION AND MANAGEMENT
-
-def deduplicate_dataframe(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Deduplicates a DataFrame on ["Client ID", "Enrollment ID"] if both exist.
-    Otherwise, deduplicates on ["Client ID"] only.
-    
-    Args:
-        df: DataFrame to deduplicate
-        
-    Returns:
-        Deduplicated DataFrame
-    """
-    subset_cols = []
-    if "Client ID" in df.columns:
-        subset_cols.append("Client ID")
-    if "Enrollment ID" in df.columns:
-        subset_cols.append("Enrollment ID")
-    
-    if subset_cols:
-        return df.drop_duplicates(subset=subset_cols, keep="first")
-    else:
-        return df
-
-
-@st.cache_data
-def load_csv(uploaded_file) -> pd.DataFrame:
-    """
-    Load and pre-process the CSV file.
-    
-    Args:
-        uploaded_file: File object from st.file_uploader
-        
-    Returns:
-        Processed DataFrame
-    """
-    try:
-        df = pd.read_csv(uploaded_file)
-        # Convert any columns with "ID" in the name to numeric, ignoring errors
-        for col in df.columns:
-            if "ID" in col:
-                df[col] = pd.to_numeric(df[col], errors="coerce").astype("Int64")
-        return df
-    except Exception as e:
-        st.error(f"Error loading CSV file: {str(e)}")
-        return pd.DataFrame()
-
-
-def filter_data(df: pd.DataFrame, program_coc: str, local_coc: str) -> pd.DataFrame:
-    """
-    Filter the DataFrame based on CoC selections.
-    
-    Args:
-        df: Input DataFrame
-        program_coc: Selected Program Setup CoC value ("None" if not filtering)
-        local_coc: Selected Local CoC Code value ("None" if not filtering)
-        
-    Returns:
-        Filtered DataFrame
-    """
-    df_filtered = df.copy()
-    if program_coc != "None" and "Program Setup CoC" in df_filtered.columns:
-        df_filtered = df_filtered[df_filtered["Program Setup CoC"] == program_coc]
-    if local_coc != "None" and "Local CoC Code" in df_filtered.columns:
-        df_filtered = df_filtered[df_filtered["Local CoC Code"] == local_coc]
-    return df_filtered
-
-
-# Constants used throughout the application
-def get_constants():
-    """
-    Returns a dictionary of constants used throughout the application.
-    """
-    return {
-        "GPD_FUNDING_SOURCES": [
-            "VA: Grant Per Diem – Low Demand",
-            "VA: Grant Per Diem – Hospital to Housing",
-            "VA: Grant Per Diem – Clinical Treatment",
-            "VA: Grant Per Diem – Service Intensive Transitional Housing"
-        ],
-        "ALLOWED_PROJECT_TYPES": [
-            "Transitional Housing",
-            "Coordinated Entry",
-            "PH – Rapid Re-Housing",
-            "PH – Permanent Supportive Housing (disability required for entry)",
-            "Emergency Shelter – Night-by-Night",
-            "Emergency Shelter – Entry Exit",
-            "Other",
-            "Street Outreach",
-            "PH – Housing Only",
-            "PH – Housing with Services (no disability required for entry)",
-            "Safe Haven"
-        ]
     }
