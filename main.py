@@ -36,7 +36,7 @@ from metrics_display import (
     display_dashboard_metrics,
     display_reference_metrics
 )
-from logo import HTML_FOOTER, HTML_HEADER_LOGO
+from logo import HTML_FOOTER, HTML_HEADER_LOGO, HTML_HEADER_TITLE, setup_header
 from styling import apply_custom_css, style_metric_cards
 
 
@@ -240,8 +240,7 @@ def main():
     initialize_session_state()
 
     # Header & logo
-    st.markdown(HTML_HEADER_LOGO, unsafe_allow_html=True)
-    st.title("Veterans Benchmarks Dashboard")
+    setup_header()
     st.write("This dashboard provides metrics on Veterans served in the past 90 days.")
 
     # -----------------------
@@ -298,7 +297,7 @@ def main():
         st.markdown(
             """
             <h2 style='text-align: center; color: #00629b; font-weight: bold;'>
-                Veterans Benchmarks
+                Veterans USICH Benchmarks Supplemental
             </h2>
             """,
             unsafe_allow_html=True

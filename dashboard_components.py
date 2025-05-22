@@ -12,10 +12,10 @@ from datetime import datetime
 def display_reporting_period_banner(
     reporting_period_start: datetime,
     reporting_period_end: datetime,
-    background_color: str = "#3E3E3E",
-    border_left_color: str = "#1f77b4",
-    text_color: str = "white",
-    subtext_color: str = "#cccccc",
+    background_color: str = "#f8fbf9",
+    border_left_color: str = "#00629b",
+    text_color: str = "#0a0a0a",
+    subtext_color: str = "#4a4a4a",
     border_radius_px: int = 5,
     padding_px: int = 15,
     margin_bottom_rem: float = 2.0
@@ -48,6 +48,7 @@ def display_reporting_period_banner(
         border-left: 5px solid {border_left_color};
         border-radius: {border_radius_px}px;
         margin-bottom: {margin_bottom_rem}rem;
+        border: 1px solid #e2efe8;
     '>
         <h3 style='margin-top: 0; color: {text_color};'>📊 Reporting Period</h3>
         <p style='font-size: 1.2rem; margin-bottom: 0; color: {subtext_color};'>
@@ -77,9 +78,9 @@ def display_metric_card(
     
     st.markdown(
         f"""
-        <div style="padding: 10px; background-color: #3E3E3E; border: 1px solid #444444; border-radius: 8px; border-left: 5px solid #1f77b4; margin-bottom: 10px; box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.2);">
-            <div style="font-weight: bold; color: #1f77b4; font-size: 1.1rem; margin-bottom: 8px;">{title}</div>
-            <div style="font-size: 1.5rem; font-weight: bold; color: #FFFFFF;">{value}</div>
+        <div style="padding: 10px; background-color: #ffffff; border: 1px solid #e2efe8; border-radius: 8px; border-left: 5px solid #00629b; margin-bottom: 10px; box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.1);">
+            <div style="font-weight: bold; color: #00629b; font-size: 1.1rem; margin-bottom: 8px;">{title}</div>
+            <div style="font-size: 1.5rem; font-weight: bold; color: #0a0a0a;">{value}</div>
         </div>
         """,
         unsafe_allow_html=True
@@ -112,7 +113,7 @@ def display_detailed_metric_card(
     c1, c2, c3, c4 = st.columns(col_width)
     
     with c1:
-        st.markdown(f"<span style='font-weight: bold; color: #1f77b4; font-size: 1.1rem;'>{metric_id}</span>", unsafe_allow_html=True)
+        st.markdown(f"<span style='font-weight: bold; color: #00629b; font-size: 1.1rem;'>{metric_id}</span>", unsafe_allow_html=True)
     
     with c2:
         # Use the metric ID as the label for accessibility, but collapse it visually

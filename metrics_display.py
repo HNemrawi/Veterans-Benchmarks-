@@ -46,17 +46,17 @@ def display_dashboard_metrics(metrics_data: Dict[str, Dict[str, Any]]):
     # Section A: Chronic homelessness
     st.markdown(
         """
-        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 12px; color: #1f77b4;">
+        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 12px; color: #00629b;">
           A. Have you ended chronic and long-term homelessness among Veterans in your community?
         </div>
-        <p><strong>Target:</strong> <span style="color: #1f77b4;">Zero chronic and long-term homeless Veterans as of the date of review.</span></p>
-        <ul style="list-style-type: none; padding-left: 0; color: #FFFFFF;">
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">A1:</span> Number of chronic & long-term Homeless Veterans who are not in permanent housing</li>
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">A2:</span> Number of Chronic & Long-Term Homeless Veterans Offered a PH Intervention in the Last 2 Weeks Who Have Not Yet Accepted</li>
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">A3:</span> Number of Chronic & Long-Term Homeless Veterans that Entered a TH Program to Address a Clinical Need</li>
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">A4:</span> Number of Chronic & Long-Term Homeless Veterans Enrolled in a PH Program for &lt;90 Days Who Are Looking for Housing</li>
+        <p><strong>Target:</strong> <span style="color: #00629b;">Zero chronic and long-term homeless Veterans as of the date of review.</span></p>
+        <ul style="list-style-type: none; padding-left: 0; color: #0a0a0a;">
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">A1:</span> Number of chronic & long-term Homeless Veterans who are not in permanent housing</li>
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">A2:</span> Number of Chronic & Long-Term Homeless Veterans Offered a PH Intervention in the Last 2 Weeks Who Have Not Yet Accepted</li>
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">A3:</span> Number of Chronic & Long-Term Homeless Veterans that Entered a TH Program to Address a Clinical Need</li>
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">A4:</span> Number of Chronic & Long-Term Homeless Veterans Enrolled in a PH Program for &lt;90 Days Who Are Looking for Housing</li>
         </ul>
-        <p style="font-weight: bold; color: #ff6b6b; margin-top: 12px;">
+        <p style="font-weight: bold; color: #d32f2f; margin-top: 12px;">
           Note: A1 - A2 - A3 - A4 should = 0
         </p>
         """, 
@@ -97,14 +97,14 @@ def display_dashboard_metrics(metrics_data: Dict[str, Dict[str, Any]]):
     # Section B: Quick access to housing
     st.markdown(
         """
-        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 12px; color: #1f77b4;">
+        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 12px; color: #00629b;">
           B. Do Veterans have quick access to permanent housing?
         </div>
-        <p><strong>Target:</strong> <span style="color: #1f77b4;">For homeless Veterans placed in permanent housing (PH) in the last 90 days, the average time from date of identification to date of PH move-in is less than or equal to 90 days.</span></p>
-        <ul style="list-style-type: none; padding-left: 0; color: #FFFFFF;">
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">B1:</span> Number of Veterans Exited to or Moved Into Permanent Housing</li>
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">B2:</span> Average Days to Permanent Housing for Veterans (Goal 90 Days)</li>
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">B3:</span> Median Days to Permanent Housing for Veterans (Goal 90 Days)</li>
+        <p><strong>Target:</strong> <span style="color: #00629b;">For homeless Veterans placed in permanent housing (PH) in the last 90 days, the average time from date of identification to date of PH move-in is less than or equal to 90 days.</span></p>
+        <ul style="list-style-type: none; padding-left: 0; color: #0a0a0a;">
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">B1:</span> Number of Veterans Exited to or Moved Into Permanent Housing</li>
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">B2:</span> Average Days to Permanent Housing for Veterans (Goal 90 Days)</li>
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">B3:</span> Median Days to Permanent Housing for Veterans (Goal 90 Days)</li>
         </ul>
         """, 
         unsafe_allow_html=True
@@ -137,13 +137,13 @@ def display_dashboard_metrics(metrics_data: Dict[str, Dict[str, Any]]):
     # Section C: Sufficient housing capacity
     st.markdown(
         """
-        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 12px; color: #1f77b4;">
+        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 12px; color: #00629b;">
           C. Does the community have sufficient permanent housing capacity?
         </div>
-        <p><strong>Target:</strong> <span style="color: #1f77b4;">In the last 90 days, the total number of homeless Veterans moving into permanent housing is greater than or equal to the total number of newly identified homeless Veterans.</span></p>
-        <ul style="list-style-type: none; padding-left: 0; color: #FFFFFF;">
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">C1:</span> Number of Veterans Exited to or Moved Into Permanent Housing</li>
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">C2:</span> Number of Newly Identified Homeless Veterans</li>
+        <p><strong>Target:</strong> <span style="color: #00629b;">In the last 90 days, the total number of homeless Veterans moving into permanent housing is greater than or equal to the total number of newly identified homeless Veterans.</span></p>
+        <ul style="list-style-type: none; padding-left: 0; color: #0a0a0a;">
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">C1:</span> Number of Veterans Exited to or Moved Into Permanent Housing</li>
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">C2:</span> Number of Newly Identified Homeless Veterans</li>
         </ul>
         """, 
         unsafe_allow_html=True
@@ -168,13 +168,13 @@ def display_dashboard_metrics(metrics_data: Dict[str, Dict[str, Any]]):
     # Section D: Housing First commitment
     st.markdown(
         """
-        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 12px; color: #1f77b4;">
+        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 12px; color: #00629b;">
           D. Is the community committed to Housing First and provides service-intensive transitional housing to Veterans experiencing homelessness only in limited instances?
         </div>
-        <p><strong>Target:</strong> <span style="color: #1f77b4;">In the last 90 days, the total number of homeless Veterans entering service-intensive transitional housing is less than the total number of newly identified homeless Veterans.</span></p>
-        <ul style="list-style-type: none; padding-left: 0; color: #FFFFFF;">
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">D1:</span> Number of Newly Identified Homeless Veterans Entering Transitional Housing</li>
-          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #1f77b4;">D2:</span> Number of Newly Identified Homeless Veterans</li>
+        <p><strong>Target:</strong> <span style="color: #00629b;">In the last 90 days, the total number of homeless Veterans entering service-intensive transitional housing is less than the total number of newly identified homeless Veterans.</span></p>
+        <ul style="list-style-type: none; padding-left: 0; color: #0a0a0a;">
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">D1:</span> Number of Newly Identified Homeless Veterans Entering Transitional Housing</li>
+          <li style="margin: 8px 0;"><span style="font-weight: bold; color: #00629b;">D2:</span> Number of Newly Identified Homeless Veterans</li>
         </ul>
         """, 
         unsafe_allow_html=True
@@ -216,7 +216,7 @@ def display_reference_metrics(
     c1, c2, c3, c4 = st.columns([1.2, 0.6, 2, 1])
     
     with c1:
-        st.markdown(f"<span style='font-weight: bold; color: #1f77b4; font-size: 1.1rem;'>Veterans Served</span>", unsafe_allow_html=True)
+        st.markdown(f"<span style='font-weight: bold; color: #00629b; font-size: 1.1rem;'>Veterans Served</span>", unsafe_allow_html=True)
     
     with c2:
         # Add a proper label and use CSS to hide it visually if needed
@@ -263,7 +263,7 @@ def display_reference_metrics(
             # Extract the metric ID from the title (e.g., "A1: Number of..." -> "A1")
             title_parts = metric_def["title"].split(":", 1)
             display_id = title_parts[0].strip() if len(title_parts) > 0 else metric_def["title"]
-            st.markdown(f"<span style='font-weight: bold; color: #1f77b4; font-size: 1.1rem;'>{display_id}</span>", unsafe_allow_html=True)
+            st.markdown(f"<span style='font-weight: bold; color: #00629b; font-size: 1.1rem;'>{display_id}</span>", unsafe_allow_html=True)
         
         with c2:
             # Add a proper label that will be visually hidden
@@ -292,8 +292,8 @@ def display_reference_metrics(
         title_parts = metric_def["title"].split(":", 1)
         description = title_parts[1].strip() if len(title_parts) > 1 else metric_def["title"]
         
-        # Display the full metric title after the card for clarity
-        st.markdown(f"<p style='margin-top: -15px; color: #AAAAAA;'>{description}</p>", unsafe_allow_html=True)
+        # Display the full metric title after the card for clarity - updated to use dark text
+        st.markdown(f"<p style='margin-top: -15px; color: #6a6a6a;'>{description}</p>", unsafe_allow_html=True)
         
         divider()
     
@@ -317,7 +317,7 @@ def display_reference_metrics(
             # Extract the metric ID from the title (e.g., "B1: Number of..." -> "B1")
             title_parts = metric_def["title"].split(":", 1)
             display_id = title_parts[0].strip() if len(title_parts) > 0 else metric_def["title"]
-            st.markdown(f"<span style='font-weight: bold; color: #1f77b4; font-size: 1.1rem;'>{display_id}</span>", unsafe_allow_html=True)
+            st.markdown(f"<span style='font-weight: bold; color: #00629b; font-size: 1.1rem;'>{display_id}</span>", unsafe_allow_html=True)
         
         with c2:
             # Add a proper label that will be visually hidden
@@ -346,8 +346,8 @@ def display_reference_metrics(
         title_parts = metric_def["title"].split(":", 1)
         description = title_parts[1].strip() if len(title_parts) > 1 else metric_def["title"]
         
-        # Display the full metric title after the card for clarity
-        st.markdown(f"<p style='margin-top: -15px; color: #AAAAAA;'>{description}</p>", unsafe_allow_html=True)
+        # Display the full metric title after the card for clarity - updated to use dark text
+        st.markdown(f"<p style='margin-top: -15px; color: #6a6a6a;'>{description}</p>", unsafe_allow_html=True)
         
         divider()
     
@@ -371,7 +371,7 @@ def display_reference_metrics(
             # Extract the metric ID from the title (e.g., "C1: Number of..." -> "C1")
             title_parts = metric_def["title"].split(":", 1)
             display_id = title_parts[0].strip() if len(title_parts) > 0 else metric_def["title"]
-            st.markdown(f"<span style='font-weight: bold; color: #1f77b4; font-size: 1.1rem;'>{display_id}</span>", unsafe_allow_html=True)
+            st.markdown(f"<span style='font-weight: bold; color: #00629b; font-size: 1.1rem;'>{display_id}</span>", unsafe_allow_html=True)
         
         with c2:
             # Add a proper label that will be visually hidden
@@ -400,8 +400,8 @@ def display_reference_metrics(
         title_parts = metric_def["title"].split(":", 1)
         description = title_parts[1].strip() if len(title_parts) > 1 else metric_def["title"]
         
-        # Display the full metric title after the card for clarity
-        st.markdown(f"<p style='margin-top: -15px; color: #AAAAAA;'>{description}</p>", unsafe_allow_html=True)
+        # Display the full metric title after the card for clarity - updated to use dark text
+        st.markdown(f"<p style='margin-top: -15px; color: #6a6a6a;'>{description}</p>", unsafe_allow_html=True)
         
         divider()
     
@@ -425,7 +425,7 @@ def display_reference_metrics(
             # Extract the metric ID from the title (e.g., "D1: Number of..." -> "D1")
             title_parts = metric_def["title"].split(":", 1)
             display_id = title_parts[0].strip() if len(title_parts) > 0 else metric_def["title"]
-            st.markdown(f"<span style='font-weight: bold; color: #1f77b4; font-size: 1.1rem;'>{display_id}</span>", unsafe_allow_html=True)
+            st.markdown(f"<span style='font-weight: bold; color: #00629b; font-size: 1.1rem;'>{display_id}</span>", unsafe_allow_html=True)
         
         with c2:
             # Add a proper label that will be visually hidden
@@ -454,8 +454,8 @@ def display_reference_metrics(
         title_parts = metric_def["title"].split(":", 1)
         description = title_parts[1].strip() if len(title_parts) > 1 else metric_def["title"]
         
-        # Display the full metric title after the card for clarity
-        st.markdown(f"<p style='margin-top: -15px; color: #AAAAAA;'>{description}</p>", unsafe_allow_html=True)
+        # Display the full metric title after the card for clarity - updated to use dark text
+        st.markdown(f"<p style='margin-top: -15px; color: #6a6a6a;'>{description}</p>", unsafe_allow_html=True)
         
         if metric_id != "D2":
             divider()
